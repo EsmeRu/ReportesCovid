@@ -6,7 +6,7 @@ require_once '../includes/head.php';
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 <body>
-
+    <?php require_once '../databaseconect.php';?>
     <div class="login">        
         <div class="container">                    
             <div class="image-logo">

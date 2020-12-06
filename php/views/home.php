@@ -2,9 +2,9 @@
 require_once '../includes/head.php';
 ?>
 </head>
-<body>
-    <?php require_once '../includes/nav.php';?>
-
+<body>   
+<?php require_once '../includes/nav.php';?>
+<?php require_once '../databaseconect.php';?>
     <!-- DATA TABLE-->
     <section class="mg-top">
         <div class="container">
