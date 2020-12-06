@@ -1,0 +1,126 @@
+html, body{
+    height: 100%;
+}
+body{
+    background-image: url("../img/covid.jpg");
+    background-position: center;
+    background-size: cover;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+b{
+    color: #000000;
+}
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden auto;
+}
+.container{
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.705);
+    max-width: 30rem;
+    margin: 3rem 0 0;
+    border-radius: 10px;
+    padding: 0;
+}
+.content {
+    display: block;
+    background-color: rgba(208, 212, 214, 0.24);
+    backdrop-filter: blur(2px);
+    padding: 1rem 4rem;
+}
+.image-logo{
+    background-image: url("../img/fondo.png");
+    text-align: center;
+    padding: 1.5rem 0 .5rem;
+}
+.image-logo img{
+    width: 8rem;
+    filter: opacity(80%)
+}
+.image-logo h2{
+    margin: 0;
+    font-family: monospace;
+    font-size: 2.5rem;
+    color: #000000;
+}
+input[type=email], input[type=password],input[type=text] {
+    outline: none;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 5px 0;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 25px;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: #ffffffff;
+    padding: 14px 20px;
+    margin: 15px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  button:hover {
+    background-color: #2f7733;
+  }
+  #signIn, #logIn{
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      margin-top: 2px;
+      color: #000000;
+      font-weight: bold;
+      transition: 400ms;
+  }
+  #signIn:hover, #logIn:hover{
+      color:#3E576C;
+  }
+  .hidden{
+      display: none;
+  }
+/* .back-arrow {
+    width: 100%;
+    position: relative;
+    left: -45%
+} */
+
+.fas{
+    color: #727272;
+    font-size: 25px;
+    transition: 300ms;
+}
+
+.fas:hover {
+    color: #3F3F3F;
+}
+  @media screen and (max-width: 500px){
+    .login{
+        justify-content: flex-start;
+        backdrop-filter: blur(2px);
+        background-color: rgba(208, 212, 214, 0.24);
+    }
+    .container{
+        min-width: auto;
+        min-height: auto;
+        margin: 0;
+        box-shadow: none!important;
+        
+    }
+    .content{
+        background-color: transparent;
+        backdrop-filter: blur(0px);
+        padding: 2rem 3rem;
+    }
+    .image-logo{
+        padding: 3rem 0 2rem;
+    }
+  }
