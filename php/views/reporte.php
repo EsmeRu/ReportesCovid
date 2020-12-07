@@ -1,7 +1,22 @@
 <?php
-require_once '../includes/head.php';
-$action = $_GET['action'];
+    require_once '../includes/head.php';
+    $action = $_GET['action'];
+    require_once '../databaseconect.php';
+    $sql = "SELECT idMunicipio, Nombre FROM Municipios;"; 
+    $sqlMunicipios = $connection->query($sql);
 ?>
+<script languaje="javascript"> 
+        $(document).ready(function(){            
+            $("#municipios").change(function(){
+                $("#municipios option:selected").each(function() {
+                    idMunicipio = $(this).val();
+                    $.post("../includes/getCiudades.php", {idMunicipio: idMunicipio},function(data){
+                        $("#ciudades").html(data);
+                    })
+                })
+            })
+        })
+    </script>
 </head>
 <body>
     <?php require_once '../includes/nav.php';?>
@@ -18,10 +33,9 @@ $action = $_GET['action'];
                 <div class="site">
                     <label for="municipios">Municipio</label>
                     <select id="municipios" name="municipio">
-                        <option value="" selected disabled> --Seleccione-- </option>
-                        <option value="1">La Paz</option>
-                        <option value="2">Los Cabos</option>
-                        <option value="3">Loreto</option>
+                        <?php while($row = $sqlMunicipios->fetch_assoc()) { ?>
+                            <option value="<?php echo $row['idMunicipio']; ?>"> <?php echo $row['Nombre']; ?> </option>
+                        <?php }?>
                     </select>
                 </div>
                 <div class="site">

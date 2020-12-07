@@ -1,29 +1,20 @@
 <?php
-    session_start();
+    require_once '../includes/head.php';
     require '../databaseconect.php';
 
     if(isset($_SESSION['Id'])){
         if(!empty($_POST['municipios']) && !empty($_POST['ciudades']) && !empty($_POST['direccion']) && !empty($_POST['descripcion'])){
-            $direccion = $_POST['direccion'];     
-            echo '<script language="javascript">alert('.$direccion.');</script>';
+            $direccion = $_POST['direccion'];
             $descripcion = $_POST['descripcion'];
-            echo '<script language="javascript">alert('.$descripcion.');</script>';
-            $idCliente = $_SESSION['Id'];
+            $idCliente = $_SESSION['id'];
             $idMunicipio = $_POST['municipios'];
-            echo '<script language="javascript">alert('.$idMunicipio.');</script>';
             $idCiudad = $_POST['ciudades'];
-            echo '<script language="javascript">alert('.$idCiudad.');</script>';                   
-            echo '<script language="javascript">alert('.$idCliente.');</script>';
             $sql = "CALL NuevoReporte(?, ?, ?, ?, ?);";
             $statement = $connection->prepare($sql);
-            $sql->bind_param("sssss",$idCliente,$idMunicipio,$idCiudad,$direccion,$descripcion); 
-            $sql->execute();
+            $statement->bind_param("sssss",$idCliente,$idMunicipio,$idCiudad,$direccion,$descripcion); 
+            $statement->execute();
         }
     }
-?>
-
-<?php 
-    require_once '../includes/head.php';
 ?>
 
 </head>

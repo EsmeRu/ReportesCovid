@@ -8,8 +8,7 @@
     require_once '../includes/head.php';
 ?>
     <script languaje="javascript"> 
-        $(document).ready(function(){
-            
+        $(document).ready(function(){            
             $("#municipios").change(function(){
                 $("#municipios option:selected").each(function() {
                     idMunicipio = $(this).val();

@@ -11,13 +11,23 @@ require_once '../includes/head.php';
             <div class="row">
                 <div class="col-md-12">
                     <div class="flex-container jc-c">
-                        <h2>REPORTES<strong>-ENVIADOS</strong></h2>
-                        <a href="./reporte.php?action=agregar"><button id="addBtn" class="btn btn-success">
-                        <i class="fas fa-plus-circle"></i> Agregar Reporte</button></a>
+                        <?php if(isset($_SESSION['Type'])): ?>
+                            <?php if($_SESSION['Type'] == 'Administrador'):?>
+                                <h2>REPORTES<strong>-RECIBIDOS</strong></h2>
+                            <?php else: ?>
+                                <h2>REPORTES<strong>-ENVIADOS</strong></h2>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <?php if(isset($_SESSION['Type'])): ?>
+                            <?php if($_SESSION['Type'] == 'Cliente'):?>
+                                <a href="./nuevoReporte.php?action=agregar"><button id="addBtn" class="btn btn-success">
+                                <i class="fas fa-plus-circle"></i> Agregar Reporte</button></a>
+                            <?php endif; ?>
+                        <?php endif; ?>
                     </div>
                     
                     <?php
-                        $elementos = array('Nombre','Municipio','Ciudad','Dirección','Fecha de reporte','Status')
+                        $elementos = array('Nombre','Municipio','Ciudad','Dirección','Fecha de reporte','Status');
                     ?>
 
                     <div class="mg-top report-t">
@@ -31,11 +41,10 @@ require_once '../includes/head.php';
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                
-                                    if(isset($_SESSION['user'])) {
-                                        $email = $_SESSION['user']['Email'];
-                                        $sql = mysqli_query($connection, "SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE idCliente = (select idCliente from Clientes where Email = '$email')");
+                                <?php  
+                                    if(isset($_SESSION['Type'])) {
+                                        $email = $_SESSION['Email'];
+                                        $sql = mysqli_query($connection, "SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE idCliente = (select idCliente from Clientes where Email = '$email');");
                                         
                                         if(mysqli_num_rows($sql) == 0){
                                             echo '<td>No has hecho ningún reporte.</td>';
