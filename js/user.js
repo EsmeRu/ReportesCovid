@@ -1,4 +1,5 @@
 $('#submitLog').click( (e) => {	
+	// e.preventDefault();
 	const email = document.querySelector("#email").value
 	const password = document.querySelector("#passwordLogIn").value
 })
@@ -27,3 +28,4 @@ const clearInput = () => {
 	document.querySelector('#passwordSignIn').value = "";
 	document.querySelector('#confirmPassword').value = "";
 }
+

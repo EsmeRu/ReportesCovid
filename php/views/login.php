@@ -1,16 +1,27 @@
 <?php
-    require '../databaseconect.php';
+    session_start();
+    $cerrar_sesion = $_GET['cerrar_sesion'];
+    if($cerrar_sesion){
+        session_destroy();
+    }
+
+    require '../databaseconect.php';  
 
     if(!empty($_POST['emailLogIn']) && !empty($_POST['pswLogIn'])){
-        $cliente = $connection->prepare("SELECT Nombre, Email,AES_DECRYPT(Contraseña, 'cliente') AS Contraseña FROM Clientes WHERE Email = ?;");
-        $cliente->bind_param('s',$_POST['emailLogIn']);
+        $cliente = $connection->prepare("SELECT Nombre, Email,AES_DECRYPT(Contraseña, 'cliente') AS Contraseña FROM Clientes WHERE Email = '".$_POST['emailLogIn']."';");
+        // $cliente->bind_param("s",$_POST['emailLogIn']);
         $cliente->execute();
 
         $resultado = $cliente->get_result()->fetch_assoc();
-
+        if(!isset($_SESSION["user"])){
+            session_start();
+        }
+        
         if(count($resultado) > 0){
             if($_POST['pswLogIn'] === $resultado['Contraseña']){
                 echo '<script language="javascript">alert("Mi loco dele pa dentro");</script>';
+                $_SESSION["user"] = $resultado;
+                header("Location: ./home.php"); 
             } else {
                 echo '<script language="javascript">alert("Ta mal la contraseña we");</script>';
             }

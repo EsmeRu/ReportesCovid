@@ -27,9 +27,8 @@
                 <a href="../views/home.php">Reportes</a>
                 <a href="../views/account.php">Cuenta</a>
                 <div class="">
-                    <a href="../views/login.php" class="account-dropdown__footer">Cerrar Sesión</a>
+                    <a href="../views/login.php?cerrar_sesion=true" class="account-dropdown__footer">Cerrar Sesión</a>
                 </div>
-                
             </div>
         </div>
     </div>

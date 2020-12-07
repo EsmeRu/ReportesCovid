@@ -16,4 +16,7 @@ const setDisabled = (action = "") => {
         document.getElementById("addBtn").disabled = false
 
     }
+    else if(action == "agregar"){
+        document.getElementById("editBtn").disabled = true
+    }
 }
