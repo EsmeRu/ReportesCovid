@@ -32,6 +32,7 @@ require_once '../includes/head.php';
                             </thead>
                             <tbody>
                                 <?php
+                                
                                     if(isset($_SESSION['user'])) {
                                         $email = $_SESSION['user']['Email'];
                                         $sql = mysqli_query($connection, "SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE idCliente = (select idCliente from Clientes where Email = '$email')");

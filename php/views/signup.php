@@ -13,6 +13,7 @@
 
             if($statement->execute()){
                 echo '<script language="javascript">alert("Usuario creado correctamente");</script>';
+                header('Location: ../../php/views/login.php');
             } else {
                 echo '<script language="javascript">alert("Ocurrio un error al crear el usuario");</script>';
             }

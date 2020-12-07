@@ -21,15 +21,16 @@
             if($_POST['pswLogIn'] === $resultado['Contraseña']){
                 echo '<script language="javascript">alert("Mi loco dele pa dentro");</script>';
                 $_SESSION["user"] = $resultado;
-                header("Location: ./home.php"); 
+                    header('Location: ../../php/views/home.php');
+                } else {
+                    echo '<script language="javascript">alert("Contraseña incorrecta");</script>';
+                }
+
             } else {
-                echo '<script language="javascript">alert("Ta mal la contraseña we");</script>';
+                echo '<script language="javascript">alert("No hay un usuarior registrado con ese correo");</script>';
             }
-        } else {
-            echo '<script language="javascript">alert("Ta vacio we");</script>';
-        }
-    }
-?>
+        } 
+    ?>
 
 <?php
     require_once '../includes/head.php';
