@@ -48,6 +48,11 @@ header{
 .mg-top{
     margin-top: 3rem;
 }
+.titleButton{
+    width: 100%; 
+    margin-top: 3rem; 
+    justify-content: space-around;
+}
 /* BUTTON */
 #addBtn, #editBtn{
     height: 3rem;

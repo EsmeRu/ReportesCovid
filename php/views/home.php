@@ -52,13 +52,10 @@ require_once '../includes/head.php';
                                     </td>
                                     <td >
                                         <div class="flex-container" style="justify-content: space-evenly;">
-                                            <a href="./reporte.php?action=editar" class="item" title="Editar">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a class="item" title="ocultar">
+                                            <a class="item" title="eliminar">
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
-                                            <a href="./reporte.php?action=ver" class="item" title="Ver">
+                                            <a href="./reporte.php?action=ver&id=4" class="item" title="Más">
                                             <i class="fas fa-ellipsis-h"></i>
                                             </a>
                                         </div>

@@ -5,8 +5,21 @@ require_once '../includes/head.php';
 <body>
     <?php require_once '../includes/nav.php';?>
 
-    <?php $datosPersonales = $_POST; ?>
+    <section>
+    <h2>Registro</h2>
 
-    <?php var_dump($datosPersonales["apellido"]);  ?>
+        <?php if(isset($_POST['submit'])): 
+            
 
-    <?php require_once '../includes/footer.php';?>
+            ?>
+            
+            <pre>
+                <?php $datosPersonales = $_POST; ?>
+
+                <?php var_dump($datosPersonales);  ?>
+            </pre>
+        <?php endif; ?>
+    </section>
+
+    </body>
+</html>

@@ -6,6 +6,5 @@
             <p> (612)-569-2587 <span> | </span> admin@reportecovid.mx </p>
         </div>
     </footer>
-
 </body>
 </html>

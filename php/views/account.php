@@ -5,16 +5,16 @@ require_once '../includes/head.php';
 <body>
     <?php require_once '../includes/nav.php';?>
 
-    
-    
-    <main class="detail-report-container" style="margin-bottom: 3rem;">
-        <form action="data.php" method="post" class="flex-container detail-report">
 
-            <div class="flex-container jc-c" style="width: 100%; margin-top: 3rem;">
-                <h2>DETALLES<strong>-CUENTA</strong></h2>
-                    <button id="addBtn" class="btn btn-primary">
-                    <i class="fas fa-edit"></i> Editar Cuenta</button>
-            </div>
+    <main class="detail-report-container" style="margin-bottom: 3rem;">
+
+        <div class="flex-container jc-c titleButton">
+            <h2>DETALLES<strong>-CUENTA</strong></h2>
+                <button id="addBtn" class="btn btn-primary">
+                <i class="fas fa-edit"></i> Editar Cuenta</button>
+        </div>
+
+        <form action="" method="post" class="flex-container detail-report">
 
             <div class="flex-container jc-c" style="width: 100%;">
                 <div class="site">
