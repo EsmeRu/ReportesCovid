@@ -2,21 +2,51 @@
     require '../databaseconect.php';
 
     if(!empty($_POST['emailLogIn']) && !empty($_POST['pswLogIn'])){
-        $cliente = $connection->prepare("SELECT Nombre, Email,AES_DECRYPT(Contraseña, 'cliente') AS Contraseña FROM Clientes WHERE Email = ?;");
-        $cliente->bind_param('s',$_POST['emailLogIn']);
-        $cliente->execute();
+        $administrador = $connection->prepare("SELECT * FROM Administradores WHERE Email = ?;");
+        $administrador->bind_param('s',$_POST['emailLogIn']);
+        $administrador->execute();
 
-        $resultado = $cliente->get_result()->fetch_assoc();
-
+        $resultado = $administrador->get_result()->fetch_assoc();
         if(count($resultado) > 0){
-            if($_POST['pswLogIn'] === $resultado['Contraseña']){
-                echo '<script language="javascript">alert("Mi loco dele pa dentro");</script>';
-            } else {
-                echo '<script language="javascript">alert("Ta mal la contraseña we");</script>';
+            echo '<script language="javascript">alert("Siay admin");</script>';
+            switch($resultado['idAdministrador']){
+                case 1:
+                    echo '<script language="javascript">alert("Andoviendo el 1");</script>';
+                    $passAdmin = $connection->prepare("SELECT AES_DECRYPT(Contraseña, 'esme') AS Contraseña FROM Administradores WHERE Email = ?;");
+                break;
+                case 2:
+                    echo '<script language="javascript">alert("Andoviendo el 2");</script>';
+                    $passAdmin = $connection->prepare("SELECT AES_DECRYPT(Contraseña, 'chris') AS Contraseña FROM Administradores WHERE Email = ?;");
+                break;
+                case 3:
+                    echo '<script language="javascript">alert("Andoviendo el 3");</script>';
+                    $passAdmin = $connection->prepare("SELECT AES_DECRYPT(Contraseña, 'profe') AS Contraseña FROM Administradores WHERE Email = ?;");
+                break;                    
             }
+            $passAdmin->bind_param('s',$_POST['emailLogIn']);
+            $passAdmin->execute();
+            $passDecrypt = $passAdmin->get_result()->fetch_assoc();
+            if($passDecrypt['Contraseña'] == $_POST['pswLogIn']){
+                echo '<script language="javascript">alert("Bienvenido admin");</script>';
+            }
+            
         } else {
-            echo '<script language="javascript">alert("Ta vacio we");</script>';
-        }
+            $cliente = $connection->prepare("SELECT Nombre, Email,AES_DECRYPT(Contraseña, 'cliente') AS Contraseña FROM Clientes WHERE Email = ?;");
+            $cliente->bind_param('s',$_POST['emailLogIn']);
+            $cliente->execute();
+
+            $resultado = $cliente->get_result()->fetch_assoc();
+
+            if(count($resultado) > 0){
+                if($_POST['pswLogIn'] === $resultado['Contraseña']){
+                    echo '<script language="javascript">alert("Mi loco dele pa dentro");</script>';
+                } else {
+                    echo '<script language="javascript">alert("Ta mal la contraseña we");</script>';
+                }
+            } else {
+                echo '<script language="javascript">alert("Ta vacio we");</script>';
+            }
+        }        
     }
 ?>
 
