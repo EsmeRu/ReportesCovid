@@ -1,3 +1,8 @@
+$('#enviarRepo').click((e)=>{
+    const direccion = document.getElementById("direccion").value;
+    const descripcion = document.getElementById("descripcion").value;
+})
+
 const setDisabled = (action = "") => {
     if (action == "ver") {
         document.getElementById("municipios").disabled = true

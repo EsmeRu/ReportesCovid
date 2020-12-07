@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require '../databaseconect.php';
 
     if(!empty($_POST['emailLogIn']) && !empty($_POST['pswLogIn'])){
@@ -7,19 +8,15 @@
         $administrador->execute();
 
         $resultado = $administrador->get_result()->fetch_assoc();
-        if(count($resultado) > 0){
-            echo '<script language="javascript">alert("Siay admin");</script>';
+        if(!empty($resultado)){
             switch($resultado['idAdministrador']){
                 case 1:
-                    echo '<script language="javascript">alert("Andoviendo el 1");</script>';
                     $passAdmin = $connection->prepare("SELECT AES_DECRYPT(Contraseña, 'esme') AS Contraseña FROM Administradores WHERE Email = ?;");
                 break;
                 case 2:
-                    echo '<script language="javascript">alert("Andoviendo el 2");</script>';
                     $passAdmin = $connection->prepare("SELECT AES_DECRYPT(Contraseña, 'chris') AS Contraseña FROM Administradores WHERE Email = ?;");
                 break;
                 case 3:
-                    echo '<script language="javascript">alert("Andoviendo el 3");</script>';
                     $passAdmin = $connection->prepare("SELECT AES_DECRYPT(Contraseña, 'profe') AS Contraseña FROM Administradores WHERE Email = ?;");
                 break;                    
             }
@@ -27,26 +24,34 @@
             $passAdmin->execute();
             $passDecrypt = $passAdmin->get_result()->fetch_assoc();
             if($passDecrypt['Contraseña'] == $_POST['pswLogIn']){
-                echo '<script language="javascript">alert("Bienvenido admin");</script>';
-            }
-            
+                $_SESSION["Type"] = "Administrador";
+                $_SESSION["Id"] = $resultado['idAdministrador'];
+                sleep(2);
+                header('Location: ../../php/views/home.php');
+            }            
         } else {
-            $cliente = $connection->prepare("SELECT Nombre, Email,AES_DECRYPT(Contraseña, 'cliente') AS Contraseña FROM Clientes WHERE Email = ?;");
+            $cliente = $connection->prepare("SELECT idCliente,Nombre, Email,AES_DECRYPT(Contraseña, 'cliente') AS Contraseña FROM Clientes WHERE Email = ?;");
             $cliente->bind_param('s',$_POST['emailLogIn']);
             $cliente->execute();
 
             $resultado = $cliente->get_result()->fetch_assoc();
 
             if(count($resultado) > 0){
-                if($_POST['pswLogIn'] === $resultado['Contraseña']){
-                    echo '<script language="javascript">alert("Mi loco dele pa dentro");</script>';
+                if($_POST['pswLogIn'] === $resultado['Contraseña']){            
+                    $_SESSION["Type"] = "Cliente";
+                    $_SESSION["Id"] = $resultado['idCliente'];
+                    sleep(2);
+                    header('Location: ../../php/views/home.php');
                 } else {
-                    echo '<script language="javascript">alert("Ta mal la contraseña we");</script>';
+                    echo '<script language="javascript">alert("Contraseña incorrecta");</script>';
                 }
             } else {
-                echo '<script language="javascript">alert("Ta vacio we");</script>';
+                echo '<script language="javascript">alert("No hay un usuarior registrado con ese correo");</script>';
             }
-        }        
+        }
+        $_SESSION["Nombre"] = $resultado['Nombre'];
+        $_SESSION["Email"] = $resultado['Email'];
+        $_SESSION["Contraseña"] = $resultado['Contraseña'];        
     }
 ?>
 

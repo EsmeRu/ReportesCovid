@@ -1,19 +1,34 @@
 <?php
-require_once '../includes/head.php';
+    session_start();
+    require_once '../databaseconect.php';
+?>
+
+<?php
+    require_once '../includes/head.php';    
 ?>
 </head>
 <body>   
 <?php require_once '../includes/nav.php';?>
-<?php require_once '../databaseconect.php';?>
     <!-- DATA TABLE-->
     <section class="mg-top">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="flex-container jc-c">
-                        <h2>REPORTES<strong>-ENVIADOS</strong></h2>
-                        <a href="./reporte.php?action=agregar"><button id="addBtn" class="btn btn-success">
-                        <i class="fas fa-plus-circle"></i> Agregar Reporte</button></a>
+                        <?php if(isset($_SESSION['Type'])): ?>
+                            <?php if($_SESSION['Type'] === 'Administrador'):?>
+                                <h2>REPORTES<strong>-RECIBIDOS</strong></h2>
+                            <?php else: ?>
+                                <h2>REPORTES<strong>-ENVIADOS</strong></h2>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <?php if(isset($_SESSION['Type'])): ?>
+                            <?php if($_SESSION['Type'] === 'Cliente'):?>
+                                <a href="./nuevoReporte.php?action=agregar"><button id="addBtn" class="btn btn-success">
+                                <i class="fas fa-plus-circle"></i> Agregar Reporte</button></a>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        
                     </div>
                     
                     <?php
@@ -70,6 +85,5 @@ require_once '../includes/head.php';
         </div>
     </section>
                 <!-- END DATA TABLE-->
-
 
     <?php require_once '../includes/footer.php';?>
