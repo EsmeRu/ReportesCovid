@@ -49,8 +49,12 @@ header{
     margin-top: 3rem;
 }
 /* BUTTON */
-#addBtn{
+#addBtn, #editBtn{
     height: 3rem;
+}
+.actualizar-Btn{
+    margin: 2rem 0;
+    background-color: #218838;
 }
 
 .btn-success{

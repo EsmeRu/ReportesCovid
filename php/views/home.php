@@ -12,25 +12,32 @@ require_once '../includes/head.php';
                 <div class="col-md-12">
                     <div class="flex-container jc-c">
                         <h2>REPORTES<strong>-ENVIADOS</strong></h2>
-                        <a href="./reporte.php"><button id="addBtn" class="btn btn-success">
+                        <a href="./reporte.php?action=agregar"><button id="addBtn" class="btn btn-success">
                         <i class="fas fa-plus-circle"></i> Agregar Reporte</button></a>
                     </div>
                     
+                    <?php
+                        $elementos = array('Nombre','Municipio','Ciudad','Dirección','Fecha de reporte','Status')
+                    ?>
+
                     <div class="mg-top report-t">
                         <table class="table">
                             <thead>
                                 <tr class="fixed-th">
-                                    <th>Municipio</th>
-                                    <th>Ciudad</th>
-                                    <th>Dirección</th>
-                                    <th>Fecha de reporte</th>
-                                    <th>Status</th>
+                                <?php foreach($elementos as $elemento): ?>
+                                    <th><?php echo $elemento; ?></th>
+                                <?php endforeach; ?>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="tr-shadow">
-                                    <td>La Paz</td>
+                                    <td>
+                                        Usuario Logueado
+                                    </td>
+                                    <td>
+                                        La Paz
+                                    </td>
                                     <td>
                                         La Paz
                                     </td>
@@ -45,13 +52,13 @@ require_once '../includes/head.php';
                                     </td>
                                     <td >
                                         <div class="flex-container" style="justify-content: space-evenly;">
-                                            <a href="./reporte.php" class="item" title="Editar">
+                                            <a href="./reporte.php?action=editar" class="item" title="Editar">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <a class="item" title="ocultar">
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
-                                            <a href="./reporte.php" class="item" title="Ver">
+                                            <a href="./reporte.php?action=ver" class="item" title="Ver">
                                             <i class="fas fa-ellipsis-h"></i>
                                             </a>
                                         </div>

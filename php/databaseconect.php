@@ -2,7 +2,7 @@
     $serverName = "localhost";
     $dataBase = "ReportesCOVID";
     $userName = "root";
-    $password = "yoloswag30";
+    $password = "esme1925";
 
     $connection = mysqli_connect($serverName, $userName, $password, $dataBase);
 
