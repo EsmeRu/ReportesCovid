@@ -1,4 +1,7 @@
-<?php session_start(); 
+<?php
+    if(!isset($_SESSION['Type'])){
+        session_start(); 
+    }    
 ?>
 <header class="flex-container">
     <div class="logo-container">
@@ -11,7 +14,7 @@
         </div>
 
         <div class="dropdown" style="float:right;">
-            <button onclick="myFunction()" class="dropbtn" style="outline: none;">Usuario</button>
+            <button onclick="myFunction()" class="dropbtn" style="outline: none;"><?php echo $_SESSION['Type']?></button>
 
             <div id="myDropdown" class="dropdown-content">
                 <div class="flex-container user-info">

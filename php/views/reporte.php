@@ -1,10 +1,19 @@
 <?php
+    require_once '../databaseconect.php';
     require_once '../includes/head.php';
     $action = $_GET['action'];
-    require_once '../databaseconect.php';
+    $idReporte = $_GET['id'];
+
     $sql = "SELECT idMunicipio, Nombre FROM Municipios;"; 
     $sqlMunicipios = $connection->query($sql);
+    $sql = "SELECT * FROM Reportes WHERE idReporte = ?;";
+    $sqlReporte = $connection->prepare($sql);
+    $sqlReporte->bind_param('i',$idReporte);
+    $sqlReporte->execute();
+
+    $datosReporte = $sqlReporte->get_result()->fetch_assoc();
 ?>
+
 <script languaje="javascript"> 
         $(document).ready(function(){            
             $("#municipios").change(function(){
@@ -24,42 +33,46 @@
     <main class="detail-report-container" style="margin-bottom: 5rem;">
         <div class="flex-container jc-c titleButton">
             <h2>DETALLES<strong>-REPORTE</strong></h2>
-            <a href="./reporte.php?action=editar"><button id="editBtn" class="btn btn-primary">
+            <a href="./reporte.php?action=editar&id="<?php echo $idReporte?>><button id="editBtn" class="btn btn-primary">
                 <i class="fas fa-edit"></i> Editar Reporte</button></a>
         </div>
 
         <form action="data.php" method="post" class="flex-container detail-report">
+            <?php if($_SESSION['Type'] === 'Administrador'): ?>
+                <label for="Cliente">Cliente:</label>
+                <input Type="text" name="Cliente" id="Cliente" value="<?php echo $datosReporte['NombreCliente']; ?>" >
+            <?php endif; ?>
+
             <div class="flex-container jc-c" style="width: 100%;">
                 <div class="site">
                     <label for="municipios">Municipio</label>
-                    <select id="municipios" name="municipio">
+                    <select id="municipios" name="municipios">
                         <?php while($row = $sqlMunicipios->fetch_assoc()) { ?>
-                            <option value="<?php echo $row['idMunicipio']; ?>"> <?php echo $row['Nombre']; ?> </option>
+                            <?php if($row['idMunicipio'] == $datosReporte['idMunicipio']): ?>
+                                <option value="<?php echo $row['idMunicipio']; ?>" selected> <?php echo $row['Nombre']; ?> </option>
+                            <?php endif;?>
                         <?php }?>
                     </select>
                 </div>
                 <div class="site">
                     <label for="ciudades">Ciudad</label>
-                    <select id="ciudades" name="ciudad">
-                        <option value="" selected disabled> --Seleccione-- </option>
-                        <option value="1" >La Paz</option>
-                        <option value="2">Los Cabos</option>
-                        <option value="3">Loreto</option>
+                    <select id="ciudades" name="ciudades">
+                            <option value="<?php echo $datosReporte['idCiudad']; ?>" selected> <?php echo $datosReporte['NombreCiudad']; ?> </option>
                     </select>
                 </div>
-            </div>
+            </div>            
 
             <label for="direccion">Dirección</label>
-            <input type="text" name="direccion" id="direccion" required>
+            <input type="text" name="direccion" id="direccion" value="<?php echo $datosReporte['Dirección']; ?>" required>
 
             <label for="fechaReporte">Fecha de reporte</label>
-            <input type="date" name="fechaReporte" id="fechaReporte">
+            <input type="date" name="fechaReporte" id="fechaReporte" value="<?php echo $datosReporte['Fecha']; ?>">
 
             <label for="status">Status</label>
-            <input type="text" name="status" value="Procesado" disabled>
+            <input type="text" name="status" value="<?php echo $datosReporte['StatusRepo']; ?>" disabled>
 
             <label for="descripcion">Descripción</label>
-            <textarea id="descripcion" name="descripcion" placeholder="Agrega la descripción del reporte"></textarea>
+            <textarea id="descripcion" name="descripcion" placeholder="Agrega la descripción del reporte"><?php echo $datosReporte['Descripcion']; ?></textarea>
 
             <button type="submit" id="addBtn" class="btn btn-primary actualizar-Btn">Enviar</button>
         </form>
@@ -68,7 +81,7 @@
     <?php 
         echo "
             <script>
-                setDisabled('".$action."')
+              setDisabled('".$action."')
             </script>
         ";
     ?>

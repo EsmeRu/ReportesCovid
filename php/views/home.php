@@ -1,6 +1,7 @@
 <?php
 require_once '../includes/head.php';
 ?>
+    
 </head>
 <body>   
 <?php require_once '../includes/nav.php';?>
@@ -40,19 +41,23 @@ require_once '../includes/head.php';
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tableRows">
                                 <?php  
                                     if(isset($_SESSION['Type'])) {
-                                        $email = $_SESSION['Email'];
-                                        $sql = mysqli_query($connection, "SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE idCliente = (select idCliente from Clientes where Email = '$email');");
-                                        
+                                        if($_SESSION['Type']=='Cliente'){
+                                            $email = $_SESSION['Email'];
+                                            $sql = mysqli_query($connection, "SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE idCliente = (select idCliente from Clientes where Email = '$email');");
+                                        } else {
+                                            $sql = mysqli_query($connection,"SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes;");
+                                        }                       
+                                    
                                         if(mysqli_num_rows($sql) == 0){
-                                            echo '<td>No has hecho ningún reporte.</td>';
+                                            echo '<td>No hay ningún reporte.</td>';
                                         }
                                         else{
                                             while($row = mysqli_fetch_assoc($sql)){
                                                 echo '
-                                                <tr class="tr-shadow">
+                                                <tr class="tr-shadow" >
                                                     <td>'.$row['NombreCliente'].'</td>
                                                     <td>'.$row['NombreMunicipio'].'</td>
                                                     <td>'.$row['NombreCiudad'].'</td>
@@ -64,7 +69,7 @@ require_once '../includes/head.php';
                                                             <a class="item" title="eliminar">
                                                                 <i class="fas fa-trash-alt"></i>
                                                             </a>
-                                                            <a href="./reporte.php?action=ver&id='.$row['idReporte'].'" class="item" title="Más">
+                                                            <a href="./reporte.php?action=ver&id='.$row['idReporte'].'" class="item" title="Más" name="Reporte" id="'.$row['idReporte'].'">
                                                             <i class="fas fa-ellipsis-h"></i>
                                                             </a>
                                                         </div>
