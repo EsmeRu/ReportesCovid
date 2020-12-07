@@ -1,3 +1,5 @@
+<?php session_start(); 
+?>
 <header class="flex-container">
     <div class="logo-container">
         <a href="../views/home.php"><img src="../../img/logo.png" alt=""></a>
@@ -19,8 +21,8 @@
                     </div>
 
                     <div class="user">
-                        <p class="name">Usuario</p>
-                        <span class="email">usuario@example.com</span>
+                        <p class="name"><?php echo $_SESSION['Email']; ?></p>
+                        <span class="email"><?php echo $_SESSION["Nombre"]; ?> </span>
                     </div>
 
                 </div>
