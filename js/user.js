@@ -1,19 +1,6 @@
-$('#logIn').click( () => {
-	showLogIn();
-	clearInput();
-})
-
-$('#submitLog').click( (e) => {
-	e.preventDefault();	
-	
+$('#submitLog').click( (e) => {	
 	const email = document.querySelector("#email").value
 	const password = document.querySelector("#passwordLogIn").value
-		
-})
-
-$('#signIn').click( () => {
-	showSingIn();
-	clearInput();
 })
 
 $('#submitSig').click( () => {
