@@ -31,37 +31,36 @@ require_once '../includes/head.php';
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="tr-shadow">
-                                    <td>
-                                        Usuario Logueado
-                                    </td>
-                                    <td>
-                                        La Paz
-                                    </td>
-                                    <td>
-                                        La Paz
-                                    </td>
-                                    <td>
-                                        Col. Pueblo Nuevo
-                                    </td>
-                                    <td>
-                                        12/12/2020
-                                    </td>
-                                    <td>
-                                        <span class="status">Procesado</span>
-                                    </td>
-                                    <td >
-                                        <div class="flex-container" style="justify-content: space-evenly;">
-                                            <a class="item" title="eliminar">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </a>
-                                            <a href="./reporte.php?action=ver&id=4" class="item" title="Más">
-                                            <i class="fas fa-ellipsis-h"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="spacer"></tr>                                                      
+                                <?php
+                                    $sql = mysqli_query($connection, "SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes");
+                                    if(mysqli_num_rows($sql) == 0){
+                                        echo '<td>No has hecho ningún reporte.</td>';
+                                    }else{
+                                        while($row = mysqli_fetch_assoc($sql)){
+                                            echo '
+                                            <tr class="tr-shadow">
+                                                <td>'.$row['NombreCliente'].'</td>
+                                                <td>'.$row['NombreMunicipio'].'</td>
+                                                <td>'.$row['NombreCiudad'].'</td>
+                                                <td>'.$row['Dirección'].'</td>
+                                                <td>'.$row['Fecha'].'</td>
+                                                <td>'.$row['StatusRepo'].'</td>
+                                                <td >
+                                                    <div class="flex-container" style="justify-content: space-evenly;">
+                                                        <a class="item" title="eliminar">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </a>
+                                                        <a href="./reporte.php?action=ver&id='.$row['idReporte'].'" class="item" title="Más">
+                                                        <i class="fas fa-ellipsis-h"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="spacer"></tr> 
+                                            ';
+                                        }
+                                    }
+                                ?>                                                      
                             </tbody>
                         </table>
                     </div>

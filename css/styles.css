@@ -30,7 +30,6 @@ footer, header{
     padding: 1.5rem;
     width: 100%;
 }
-
 header{
     z-index: 100;
 }
@@ -56,6 +55,7 @@ header{
 /* BUTTON */
 #addBtn, #editBtn{
     height: 3rem;
+    position: static;
 }
 .actualizar-Btn{
     margin: 2rem 0;
@@ -129,6 +129,7 @@ header{
     border-radius: 20rem;
     background-color: #d4d3d3;
     padding: .3rem .6rem;
+    margin: .3rem 0;
     backdrop-filter: blur(10px);
     color: #000000;
 }
