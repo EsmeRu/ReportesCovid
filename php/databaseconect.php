@@ -9,4 +9,5 @@
     if(!$connection){
         die("Conexion fallida: " . mysqli_connect_error());
     }
+    
 ?>

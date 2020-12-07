@@ -72,7 +72,7 @@ input[type=email], input[type=password],input[type=text] {
   button:hover {
     background-color: #2f7733;
   }
-  #signIn, #logIn{
+  #signUp, #logIn{
       text-decoration: none;
       display: flex;
       justify-content: center;
@@ -81,7 +81,7 @@ input[type=email], input[type=password],input[type=text] {
       font-weight: bold;
       transition: 400ms;
   }
-  #signIn:hover, #logIn:hover{
+  #signUp:hover, #logIn:hover{
       color:#3E576C;
   }
   .hidden{
