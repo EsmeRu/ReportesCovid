@@ -73,6 +73,16 @@ CREATE TABLE IF NOT EXISTS Reportes(
     CONSTRAINT FK_Reportes_Municipio FOREIGN KEY (idMunicipio) REFERENCES Municipios(idMunicipio) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT FK_ReportesCiudad FOREIGN KEY (idCiudad) REFERENCES Ciudades(idCiudad) ON DELETE RESTRICT ON UPDATE CASCADE
 );
+INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
+INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
+INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
+INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
+INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
+INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
+INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
+INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
+INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
+INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
 
 DELIMITER $$
 CREATE PROCEDURE RegistrarCliente(IN paramNombre VARCHAR(100), IN paramEmail VARCHAR(60), IN paramContraseña VARCHAR(20))
@@ -128,3 +138,4 @@ END &&
 
 SELECT * FROM Clientes;
 SELECT Nombre, Email,AES_DECRYPT(Contraseña, 'cliente') AS Contraseña FROM Clientes;
+SELECT * FROM Reportes ORDER BY codigo ASC
