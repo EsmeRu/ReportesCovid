@@ -106,6 +106,21 @@ require_once '../includes/head.php';
                                         }
                                         else{
                                             while($row = mysqli_fetch_assoc($sql)){
+
+                                                switch($row['StatusRepo']) {
+                                                    case 'Confirmado':
+                                                        $color = "green;";
+                                                    break;
+                                                    case 'En proceso':
+                                                        $color = "blue;";
+                                                    break;
+                                                    case 'Rechazado':
+                                                        $color = "red;";
+                                                    break;
+                                                    case 'Pendiente':
+                                                        $color = "grey;";
+                                                    break;
+                                                }
                                                 echo '
                                                 <tr class="tr-shadow">
                                                     <td>'.$row['NombreCliente'].'</td>
@@ -113,7 +128,7 @@ require_once '../includes/head.php';
                                                     <td>'.$row['NombreCiudad'].'</td>
                                                     <td>'.$row['Dirección'].'</td>
                                                     <td>'.$row['Fecha'].'</td>
-                                                    <td>'.$row['StatusRepo'].'</td>
+                                                    <td style="color: '.$color.'">'.$row['StatusRepo'].'</td>
                                                     <td >
                                                         <div class="flex-container" style="justify-content: space-evenly;">
                                                             <btn class="item" title="ocultar" id="ocultar">
@@ -140,5 +155,5 @@ require_once '../includes/head.php';
         </div>
     </section>
 
-    <script src="../../js/filter.js"></script>                                
+    <script src="../../js/filter.js"></script>
     <?php require_once '../includes/footer.php';?>

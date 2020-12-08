@@ -44,6 +44,7 @@ const updateTable = (data = []) => {
     const table = document.getElementById("tableRows");
     let result = "";
     data.forEach(element => {
+        const color = element.StatusRepo === 'Confirmado' ? 'green;' : element.StatusRepo === 'En proceso' ? 'blue;' : element.StatusRepo === 'Rechazado' ? 'red;' : 'grey;';
          result += `
             <tr class="tr-shadow">
             <td>${element.NombreCliente}</td>
@@ -51,7 +52,7 @@ const updateTable = (data = []) => {
             <td>${element.NombreCiudad}</td>
             <td>${element.Dirección}</td>
             <td>${element.Fecha}</td>
-            <td>${element.StatusRepo}</td>
+            <td style="color: ${color}">${element.StatusRepo}</td>
             <td >
                 <div class="flex-container" style="justify-content: space-evenly;">
                     <a class="item" title="eliminar">
@@ -79,4 +80,5 @@ document.querySelectorAll("#ocultar").forEach(btn=>{
         const parentTable = parentTbody.parentElement
         parentTable.removeChild(parentTbody);
     })
-})
+});
+
