@@ -17,25 +17,26 @@ require_once '../includes/head.php';
                                 <h2>REPORTES<strong>-RECIBIDOS</strong></h2>
                             <?php else: ?>
                                 <h2>REPORTES<strong>-ENVIADOS</strong></h2>
+                                <a href="./nuevoReporte.php?action=agregar"><button id="addBtn" class="btn btn-success">
+                                <i class="fas fa-plus-circle"></i> Agregar Reporte</button></a>
                             <?php endif; ?>
                         <?php endif; ?>
                         <?php if(isset($_SESSION['Type'])): ?>
                             <?php if($_SESSION['Type'] == 'Cliente'):?>
-                                <a href="./nuevoReporte.php?action=agregar"><button id="addBtn" class="btn btn-success">
-                                <i class="fas fa-plus-circle"></i> Agregar Reporte</button></a>
+                                
                             <?php endif; ?>
                         <?php endif; ?>
                     </div>
                     
                     <?php
-                        $elementos = array('Nombre','Municipio','Ciudad','Dirección','Fecha de reporte','Status');
+                        
                     ?>
 
                     <div class="mg-top report-t">
 
-                    <form class="">
-                        <div class="">
-                            <select id="filtro" class="">
+                    <form class="formFiltro">
+                        <div class="flex-container">
+                            <select id="filtro_municipio" class="">
                             <option value="" selected disabled> --Municipio-- </option>
                             <?php
                                 $sql = mysqli_query($connection, "SELECT Nombre FROM Municipios");
@@ -47,13 +48,36 @@ require_once '../includes/head.php';
                                 }   
                             ?>
                             </select>
+                            <select id="filtro_ciudad" class="">
+                            <option value="" selected disabled> --Ciudad-- </option>
+                            <?php
+                                $sql = mysqli_query($connection, "SELECT Nombre FROM Ciudades");
+                                while($row = mysqli_fetch_assoc($sql)){
+                                    echo '
+                                    >
+                                    <option value="'.$row['Nombre'].'" >'.$row['Nombre'].'</option>
+                                    ';
+                                }   
+                            ?>
+                            </select>
+                            <select id="filtro_estatus" class="">
+                                <option value="" selected disabled> --Estatus-- </option>
+                                <option value="En proceso" > En proceso </option>
+                                <option value="Confirmado" > Confirmado </option>
+                                <option value="Rechazado" > Rechazado </option>
+                                <option value="Rechazado" > Pendiente </option>
+                            </select>
                         </div>
+                        <button type="submit" id="btnFiltro">Filtrar</button>
                     </form>
 
                         <table class="table">
                             <thead>
                                 <tr class="fixed-th">
-                                <?php foreach($elementos as $elemento): ?>
+                                <?php 
+                                    $elementos = array('Nombre','Municipio','Ciudad','Dirección','Fecha de reporte','Status');
+                                    foreach($elementos as $elemento): 
+                                ?>
                                     <th><?php echo $elemento; ?></th>
                                 <?php endforeach; ?>
                                     <th></th>

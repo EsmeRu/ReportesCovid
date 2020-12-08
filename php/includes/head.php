@@ -10,4 +10,5 @@
     <link rel="stylesheet" href="../../css/styles.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <?php session_start(); ?>
