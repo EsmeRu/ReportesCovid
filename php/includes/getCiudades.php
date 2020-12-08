@@ -4,10 +4,18 @@
 
     $queryCiudades = "SELECT idCiudad, Nombre FROM Ciudades WHERE idMunicipio = '$idMunicipio'";
     $resultadoCiudades = $connection->query($queryCiudades);
-
-    $html = "<option value='' selected disabled> --Seleccione-- </option>";
+    $idCiudad = 0;
+    if(!empty($_POST['idCiudad'])){
+        $idCiudad = $_POST['idCiudad'];
+    }
+    $html = "<option value='' disabled selected> --Seleccione-- </option>";
     while($row = $resultadoCiudades->fetch_assoc()){
-        $html .= "<option value='".$row['idCiudad']."'>" .$row['Nombre']."</option>";
+        if($idCiudad === $row['idCiudad']){
+            $html .= "<option value='".$row['idCiudad']."' selected>" .$row['Nombre']."</option>";
+        } else {
+            $html .= "<option value='".$row['idCiudad']."'>" .$row['Nombre']."</option>";
+        }
+        
     }
     echo $html;
 ?>

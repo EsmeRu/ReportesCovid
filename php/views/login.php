@@ -2,6 +2,10 @@
     require_once '../includes/head.php';
     require '../databaseconect.php';
 
+    if(isset($_SESSION['Type'])){
+        session_destroy();
+    }
+
     if(!empty($_POST['emailLogIn']) && !empty($_POST['pswLogIn'])){
         $administrador = $connection->prepare("SELECT * FROM Administradores WHERE Email = ?;");
         $administrador->bind_param('s',$_POST['emailLogIn']);

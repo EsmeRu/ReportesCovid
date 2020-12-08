@@ -10,7 +10,7 @@ const setDisabled = (action = "") => {
         document.getElementById("direccion").disabled = true
         document.getElementById("fechaReporte").disabled = true
         document.getElementById("descripcion").disabled = true
-        document.getElementById("addBtn").disabled = true
+        document.getElementById("confirmBtn").style.display='none'
     }
     else if(action == "editar"){
         document.getElementById("municipios").disabled = false
@@ -18,7 +18,7 @@ const setDisabled = (action = "") => {
         document.getElementById("direccion").disabled = false
         document.getElementById("fechaReporte").disabled = false
         document.getElementById("descripcion").disabled = false
-        document.getElementById("addBtn").disabled = false
+        document.getElementById("confirmBtn").style.display='block'
 
     }
     else if(action == "agregar"){

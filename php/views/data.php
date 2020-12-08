@@ -6,7 +6,7 @@
         if(!empty($_POST['municipios']) && !empty($_POST['ciudades']) && !empty($_POST['direccion']) && !empty($_POST['descripcion'])){
             $direccion = $_POST['direccion'];
             $descripcion = $_POST['descripcion'];
-            $idCliente = $_SESSION['id'];
+            $idCliente = $_SESSION['Id'];
             $idMunicipio = $_POST['municipios'];
             $idCiudad = $_POST['ciudades'];
             $sql = "CALL NuevoReporte(?, ?, ?, ?, ?);";
