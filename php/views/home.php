@@ -32,6 +32,24 @@ require_once '../includes/head.php';
                     ?>
 
                     <div class="mg-top report-t">
+
+                    <form class="">
+                        <div class="">
+                            <select id="filtro" class="">
+                            <option value="" selected disabled> --Municipio-- </option>
+                            <?php
+                                $sql = mysqli_query($connection, "SELECT Nombre FROM Municipios");
+                                while($row = mysqli_fetch_assoc($sql)){
+                                    echo '
+                                    >
+                                    <option value="'.$row['Nombre'].'" >'.$row['Nombre'].'</option>
+                                    ';
+                                }   
+                            ?>
+                            </select>
+                        </div>
+                    </form>
+
                         <table class="table">
                             <thead>
                                 <tr class="fixed-th">
@@ -47,8 +65,14 @@ require_once '../includes/head.php';
                                         if($_SESSION['Type']=='Cliente'){
                                             $email = $_SESSION['Email'];
                                             $sql = mysqli_query($connection, "SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE idCliente = (select idCliente from Clientes where Email = '$email');");
-                                        } else {
-                                            $sql = mysqli_query($connection,"SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes;");
+                                        }
+                                        else {
+                                            // if($filter){
+                                            //     $sql = mysqli_query($connection,"SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE '$whereFilter' = '$filter';");
+                                            // }
+                                            // else{
+                                                $sql = mysqli_query($connection,"SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes;");
+                                            // }
                                         }                       
                                     
                                         if(mysqli_num_rows($sql) == 0){
@@ -90,5 +114,5 @@ require_once '../includes/head.php';
     </section>
                 <!-- END DATA TABLE-->
 
-
+    <script src="../../js/filter.js"></script>                                
     <?php require_once '../includes/footer.php';?>

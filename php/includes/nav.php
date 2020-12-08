@@ -24,8 +24,8 @@
                     </div>
 
                     <div class="user">
-                        <p class="name"><?php echo $_SESSION['Email']; ?></p>
-                        <span class="email"><?php echo $_SESSION["Nombre"]; ?> </span>
+                        <p class="name"><?php echo $_SESSION['Nombre']; ?></p>
+                        <span class="email"><?php echo $_SESSION["Email"]; ?> </span>
                     </div>
 
                 </div>
