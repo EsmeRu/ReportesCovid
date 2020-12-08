@@ -20,7 +20,6 @@
                 $("#municipios option:selected").each(function() {
                     idMunicipio = $(this).val();
                     idCiudad = <?php echo $datosReporte['idCiudad']; ?>;
-                    alert(idCiudad);
                     $.post("../includes/getCiudades.php", {idMunicipio: idMunicipio,idCiudad:idCiudad},function(data){
                         $("#ciudades").html(data);
                     })
@@ -36,8 +35,10 @@
         <div class="flex-container jc-c titleButton">
             <h2>DETALLES<strong>-REPORTE</strong></h2>
             <?php if($_SESSION['Type'] === 'Cliente'): ?>
-                <a href="./reporte.php?action=editar&id=<?php echo $idReporte?>"><button id="editBtn" class="btn btn-primary">
-                <i class="fas fa-edit"></i> Editar Reporte</button></a>
+                <a href="./reporte.php?action=editar&id=<?php echo $idReporte?>">
+                    <button id="editBtn" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Editar Reporte</button>
+                </a>
             <?php endif;?>
         </div>
 

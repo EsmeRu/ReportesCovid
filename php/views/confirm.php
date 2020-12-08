@@ -13,9 +13,16 @@
                 $sqlStatement->execute();
             }
         } else {
-            if(!empty($idReporte) && !empty($_POST['municipios']) && !empty($_POST['ciudades']) && !empty($_POST[direccion]) && !empty($_POST['descripcion'])){
+            if(!empty($idReporte) && !empty($_POST['municipios']) && !empty($_POST['ciudades']) && !empty($_POST['direccion']) && !empty($_POST['descripcion'])){
                 $idMunicipio = $_POST['municipios'];
-                $idCiudad = $
+                $idCiudad = $_POST['ciudades'];
+                $direccion = $_POST['direccion'];
+                $descripcion = $_POST['descripcion'];
+
+                $sql = "CALL ActualizarReporte(?, ?, ?, ?, ?);";
+                $Actualizar = $connection->prepare($sql);
+                $Actualizar->bind_param('iiiss',$idReporte,$idMunicipio,$idCiudad,$direccion,$descripcion); 
+                $Actualizar->execute();
             }
         }
     }
