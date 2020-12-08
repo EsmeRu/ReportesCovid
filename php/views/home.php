@@ -1,7 +1,13 @@
 <?php
 require_once '../includes/head.php';
 ?>
-    
+    <script languaje="javascript"> 
+        $(document).ready(function(){            
+            $("#ocultar").click(function(){
+                
+            })
+        })
+    </script>
 </head>
 <body>   
 <?php require_once '../includes/nav.php';?>
@@ -105,7 +111,7 @@ require_once '../includes/head.php';
                                         else{
                                             while($row = mysqli_fetch_assoc($sql)){
                                                 echo '
-                                                <tr class="tr-shadow" >
+                                                <tr class="tr-shadow">
                                                     <td>'.$row['NombreCliente'].'</td>
                                                     <td>'.$row['NombreMunicipio'].'</td>
                                                     <td>'.$row['NombreCiudad'].'</td>
@@ -114,9 +120,9 @@ require_once '../includes/head.php';
                                                     <td>'.$row['StatusRepo'].'</td>
                                                     <td >
                                                         <div class="flex-container" style="justify-content: space-evenly;">
-                                                            <a class="item" title="eliminar">
-                                                                <i class="fas fa-trash-alt"></i>
-                                                            </a>
+                                                            <btn class="item" title="ocultar" id="ocultar">
+                                                                <i class="fas fa-eye-slash"></i>
+                                                            </btn>
                                                             <a href="./reporte.php?action=ver&id='.$row['idReporte'].'" class="item" title="Más" name="Reporte" id="'.$row['idReporte'].'">
                                                             <i class="fas fa-ellipsis-h"></i>
                                                             </a>

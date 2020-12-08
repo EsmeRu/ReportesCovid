@@ -45,7 +45,7 @@ const updateTable = (data = []) => {
     let result = "";
     data.forEach(element => {
          result += `
-            <tr class="tr-shadow" >
+            <tr class="tr-shadow">
             <td>${element.NombreCliente}</td>
             <td>${element.NombreMunicipio}</td>
             <td>${element.NombreCiudad}</td>
@@ -69,3 +69,14 @@ const updateTable = (data = []) => {
 
     table.innerHTML = result
 }
+
+document.querySelectorAll("#ocultar").forEach(btn=>{
+    btn.addEventListener("click",e =>{
+        const parentDiv = e.target.parentElement
+        const parentTd = parentDiv.parentElement
+        const parentTr = parentTd.parentElement
+        const parentTbody = parentTr.parentElement
+        const parentTable = parentTbody.parentElement
+        parentTable.removeChild(parentTbody);
+    })
+})
