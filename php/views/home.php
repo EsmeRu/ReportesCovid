@@ -27,11 +27,6 @@ require_once '../includes/head.php';
                                 <i class="fas fa-plus-circle"></i> Agregar Reporte</button></a>
                             <?php endif; ?>
                         <?php endif; ?>
-                        <?php if(isset($_SESSION['Type'])): ?>
-                            <?php if($_SESSION['Type'] == 'Cliente'):?>
-                                
-                            <?php endif; ?>
-                        <?php endif; ?>
                     </div>
 
                     <div class="mg-top">
@@ -88,16 +83,16 @@ require_once '../includes/head.php';
                             <tbody id="tableRows">
                                 <?php  
                                     if(isset($_SESSION['Type'])) {
-                                        if($_SESSION['Type']=='Cliente'){
+                                        if($_SESSION['Type']=='Usuario'){
                                             $email = $_SESSION['Email'];
-                                            $sql = mysqli_query($connection, "SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE idCliente = (select idCliente from Clientes where Email = '$email');");
+                                            $sql = mysqli_query($connection, "SELECT NombreUsuario, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE idUsuario = (select idUsuario from Usuarios where Email = '$email');");
                                         }
                                         else {
                                             // if($filter){
                                             //     $sql = mysqli_query($connection,"SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE '$whereFilter' = '$filter';");
                                             // }
                                             // else{
-                                                $sql = mysqli_query($connection,"SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes;");
+                                                $sql = mysqli_query($connection,"SELECT NombreUsuario, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes;");
                                             // }
                                         }                       
                                     
@@ -108,7 +103,7 @@ require_once '../includes/head.php';
                                             while($row = mysqli_fetch_assoc($sql)){
                                                 echo '
                                                 <tr class="tr-shadow">
-                                                    <td>'.$row['NombreCliente'].'</td>
+                                                    <td>'.$row['NombreUsuario'].'</td>
                                                     <td>'.$row['NombreMunicipio'].'</td>
                                                     <td>'.$row['NombreCiudad'].'</td>
                                                     <td>'.$row['Dirección'].'</td>

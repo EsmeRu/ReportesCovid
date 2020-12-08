@@ -6,12 +6,12 @@
         if(!empty($_POST['municipios']) && !empty($_POST['ciudades']) && !empty($_POST['direccion']) && !empty($_POST['descripcion'])){
             $direccion = $_POST['direccion'];
             $descripcion = $_POST['descripcion'];
-            $idCliente = $_SESSION['Id'];
+            $idUsuario = $_SESSION['Id'];
             $idMunicipio = $_POST['municipios'];
             $idCiudad = $_POST['ciudades'];
             $sql = "CALL NuevoReporte(?, ?, ?, ?, ?);";
             $statement = $connection->prepare($sql);
-            $statement->bind_param("sssss",$idCliente,$idMunicipio,$idCiudad,$direccion,$descripcion); 
+            $statement->bind_param("sssss",$idUsuario,$idMunicipio,$idCiudad,$direccion,$descripcion); 
             $statement->execute();
         }
     }

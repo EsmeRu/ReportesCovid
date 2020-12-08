@@ -6,7 +6,7 @@
     if($_SESSION['Type'] === 'Administrador'){
         $sql = "SELECT * FROM Administradores WHERE idAdministrador = ?";
     } else {
-        $sql = "SELECT * FROM Clientes WHERE idCliente = ?";
+        $sql = "SELECT * FROM Usuarios WHERE idUsuario = ?";
     }
 
     $sqlstatement = $connection->prepare($sql);
@@ -24,7 +24,7 @@
     <main class="detail-report-container" style="margin-bottom: 5rem;">
         <div class="flex-container jc-c titleButton" style="width: 100%; margin-top: 3rem;">
                 <h2>DETALLES<strong>-CUENTA</strong></h2>
-                    <?php if($_SESSION['Type'] === 'Cliente'): ?>
+                    <?php if($_SESSION['Type'] === 'Usuario'): ?>
                         <a href="./account.php?action=editar">
                             <button id="editBtn" class="btn btn-primary">
                             <i class="fas fa-edit"></i> Editar Cuenta</button>

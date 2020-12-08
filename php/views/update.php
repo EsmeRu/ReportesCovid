@@ -8,7 +8,7 @@
             $newEmail = $_POST['email'];
             $newPassword = $_POST['password'];
 
-            $sql = "CALL ActualizarCliente(?,?,?,?)";
+            $sql = "CALL ActualizarUsuario(?,?,?,?)";
             $statement = $connection->prepare($sql);
             $statement->bind_param('isss',$_SESSION['Id'],$newName,$newEmail,$newPassword);
             $statement->execute();

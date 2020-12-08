@@ -46,7 +46,7 @@
             <input type="text" name="idReporte" id="idReporte" value="<?php echo $idReporte; ?>" class="hidden">
             <?php if($_SESSION['Type'] === 'Administrador'): ?>
                 <label for="Cliente">Cliente:</label>
-                <input Type="text" name="Cliente" id="Cliente" value="<?php echo $datosReporte['NombreCliente']; ?>" disabled>
+                <input Type="text" name="Cliente" id="Cliente" value="<?php echo $datosReporte['NombreUsuario']; ?>" disabled>
             <?php endif; ?>
 
             <div class="flex-container jc-c" style="width: 100%;">

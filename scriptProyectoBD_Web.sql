@@ -2,8 +2,8 @@ DROP DATABASE IF EXISTS ReportesCOVID;
 CREATE DATABASE IF NOT EXISTS ReportesCOVID;
 USE ReportesCOVID;
 
-CREATE TABLE IF NOT EXISTS Clientes(
-	idCliente INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS Usuarios(
+	idUsuario INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     Nombre VARCHAR(100) NOT NULL,
     Email VARCHAR(60) NOT NULL UNIQUE,
     Contraseña BLOB NOT NULL
@@ -60,8 +60,8 @@ INSERT INTO Ciudades VALUES(0,'Cabo San Lucas',5);
 
 CREATE TABLE IF NOT EXISTS Reportes(
 	idReporte INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    idCliente INT NOT NULL,
-    NombreCliente VARCHAR(100) NOT NULL,
+    idUsuario INT NOT NULL,
+    NombreUsuario VARCHAR(100) NOT NULL,
     idMunicipio INT NOT NULL,
     NombreMunicipio VARCHAR(30) NOT NULL,
     idCiudad INT NOT NULL,
@@ -69,37 +69,35 @@ CREATE TABLE IF NOT EXISTS Reportes(
     Dirección VARCHAR(100) NOT NULL,
     Fecha DATE NOT NULL,
     StatusRepo ENUM('En proceso','Confirmado','Rechazado','Pendiente') DEFAULT ('Pendiente'),
-    CONSTRAINT FK_Reportes_Clientes FOREIGN KEY (idCliente) REFERENCES Clientes(idCliente) ON DELETE NO ACTION ON UPDATE CASCADE,
+    Descripcion VARCHAR(500) NOT NULL,
+    CONSTRAINT FK_Reportes_Clientes FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario) ON DELETE NO ACTION ON UPDATE CASCADE,
     CONSTRAINT FK_Reportes_Municipio FOREIGN KEY (idMunicipio) REFERENCES Municipios(idMunicipio) ON DELETE RESTRICT ON UPDATE RESTRICT,
     CONSTRAINT FK_ReportesCiudad FOREIGN KEY (idCiudad) REFERENCES Ciudades(idCiudad) ON DELETE RESTRICT ON UPDATE CASCADE
 );
-INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
-INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
-INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
-INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
-INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
-INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
-INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
-INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
-INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
-INSERT INTO Reportes VALUES(0,1,'Nacho Iglesias', 4, 'La Paz', 7, 'La Paz', 'Civilizadores II', curdate(), 'Confirmado');
 
 DELIMITER $$
-CREATE PROCEDURE RegistrarCliente(IN paramNombre VARCHAR(100), IN paramEmail VARCHAR(60), IN paramContraseña VARCHAR(20))
+CREATE PROCEDURE RegistrarUsuario(IN paramNombre VARCHAR(100), IN paramEmail VARCHAR(60), IN paramContraseña VARCHAR(20))
 BEGIN
 	IF paramNombre IS NOT NULL THEN
 		IF paramEmail IS NOT NULL THEN
 			IF paramContraseña IS NOT NULL THEN
 				START TRANSACTION;
-					INSERT INTO Clientes VALUES (0,paramNombre,paramEmail,AES_ENCRYPT(paramContraseña,'cliente'));
+					INSERT INTO Usuarios VALUES (0,paramNombre,paramEmail,AES_ENCRYPT(paramContraseña,'usuario'));
 				COMMIT;
 			END IF;
         END IF;
     END IF;
 END $$
 
+DROP PROCEDURE ActualizarUsuario;
+DELIMITER &&
+CREATE PROCEDURE ActualizarUsuario(IN paramIdUsuario INT,IN paramNombre VARCHAR(100), IN paramEmail VARCHAR(60), IN paramContraseña VARCHAR(20))
+BEGIN
+	UPDATE Usuarios SET Nombre = paramNombre, Email = paramEmail, Contraseña = AES_ENCRYPT(paramContraseña,'usuario') WHERE idUsuario = paramIdUsuario;
+END &&
+
 DELIMITER %%
-CREATE TRIGGER Before_Update_Clientes BEFORE UPDATE ON Clientes FOR EACH ROW
+CREATE TRIGGER Before_Update_Usuario BEFORE UPDATE ON Usuarios FOR EACH ROW
 BEGIN
 	IF NEW.Nombre IS NULL THEN
 		SIGNAL SQLSTATE '45001' SET MESSAGE_TEXT = 'El nombre no puede quedar vacío';
@@ -114,28 +112,36 @@ BEGIN
     END IF;
 END %%
 
+DROP PROCEDURE NuevoReporte;
 DELIMITER &&
-CREATE PROCEDURE NuevoReporte(IN paramidCliente INT, paramidMunicipio INT, IN paramidCiudad INT, IN paramDireccion VARCHAR(100))
+CREATE PROCEDURE NuevoReporte(IN paramidUsuario INT, paramidMunicipio INT, IN paramidCiudad INT, IN paramDireccion VARCHAR(100),IN paramDescripcion VARCHAR(200))
 BEGIN
-	DECLARE varNombreCliente VARCHAR(100);
+	DECLARE varNombreUsuario VARCHAR(100);
     DECLARE varNombreMunicipio VARCHAR(30);
     DECLARE varNombreCiudad VARCHAR(30);
-	IF paramidCliente IS NOT NULL THEN
+	IF paramidUsuario IS NOT NULL THEN
 		IF paramidMunicipio IS NOT NULL THEN
 			IF paramidCiudad IS NOT NULL THEN
 				IF paramDireccion IS NOT NULL THEN 
-					START TRANSACTION;
-                        SELECT Nombre INTO varNombreMunicipio FROM Municipios WHERE idMunicipio = paramidMunicipio;
-                        SELECT Nombre INTO varNombreCiudad FROM Ciudades WHERE idCiudad = paramidCiudad;
-						SELECT Nombre INTO varNombreCliente FROM Clientes WHERE idCliente = paramidCliente;
-						INSERT INTO Reportes VALUES(0,paramidCliente,varNombreCliente,paramidMunicipio,varNombreMunicipio,paramidCiudad,varNombreCiudad,paramDireccion,CURDATE(),'Pendiente');
-                    COMMIT;
+					IF paramDescripcion IS NOT NULL THEN
+						START TRANSACTION;
+							SELECT Nombre INTO varNombreMunicipio FROM Municipios WHERE idMunicipio = paramidMunicipio;
+							SELECT Nombre INTO varNombreCiudad FROM Ciudades WHERE idCiudad = paramidCiudad;
+							SELECT Nombre INTO varNombreUsuario FROM Usuarios WHERE idUsuario = paramidUsuario;
+							INSERT INTO Reportes VALUES(0,paramidUsuario,varNombreUsuario,paramidMunicipio,varNombreMunicipio,paramidCiudad,varNombreCiudad,paramDireccion,CURDATE(),'Pendiente',paramDescripcion);
+						COMMIT;
+					END IF;
                 END IF;
             END IF;
         END IF;
     END IF;
 END &&
 
-SELECT * FROM Clientes;
-SELECT Nombre, Email,AES_DECRYPT(Contraseña, 'cliente') AS Contraseña FROM Clientes;
-SELECT * FROM Reportes ORDER BY codigo ASC
+DROP PROCEDURE ActualizarReporte;
+DELIMITER $$
+CREATE PROCEDURE ActualizarReporte(IN paramIdReporte INT, IN paramidMunicipio INT, IN paramidCiudad INT, IN paramDireccion VARCHAR(100), IN paramDescripcion VARCHAR(200))
+BEGIN
+	DECLARE varNombreMunicipio VARCHAR(30) DEFAULT (SELECT Nombre FROM Municipios WHERE idMunicipio = paramidMunicipio);
+    DECLARE varNombreCiudad VARCHAR(30) DEFAULT (SELECT Nombre FROM Ciudades WHERE idCiudad = paramidCiudad);
+    UPDATE Reportes SET idMunicipio = paramidMunicipio, NombreMunicipio = varNombreMunicipio, idCiudad = paramidCiudad, NombreCiudad = varNombreCiudad, Dirección = paramDireccion, Descripcion = paramDescripcion WHERE idReporte = paramIdReporte;
+END $$

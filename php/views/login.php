@@ -30,11 +30,11 @@
             if($passDecrypt['Contraseña'] == $_POST['pswLogIn']){
                 $_SESSION["Type"] = "Administrador";
                 $_SESSION["Id"] = $resultado['idAdministrador'];
-                sleep(2);
+                sleep(1);
                 header('Location: ../../php/views/home.php');
             }            
         } else {
-            $cliente = $connection->prepare("SELECT idCliente,Nombre, Email,AES_DECRYPT(Contraseña, 'cliente') AS Contraseña FROM Clientes WHERE Email = ?;");
+            $cliente = $connection->prepare("SELECT idUsuario,Nombre, Email,AES_DECRYPT(Contraseña, 'usuario') AS Contraseña FROM Usuarios WHERE Email = ?;");
             $cliente->bind_param('s',$_POST['emailLogIn']);
             $cliente->execute();
 
@@ -42,9 +42,9 @@
 
             if(count($resultado) > 0){
                 if($_POST['pswLogIn'] == $resultado['Contraseña']){            
-                    $_SESSION["Type"] = "Cliente";
+                    $_SESSION["Type"] = "Usuario";
                     $_SESSION["Id"] = $resultado['idCliente'];                    
-                    sleep(2);
+                    sleep(1);
                     header('Location: ../../php/views/home.php');
                 } else {
                     echo '<script language="javascript">alert("Contraseña incorrecta");</script>';
