@@ -1,13 +1,6 @@
 <?php
 require_once '../includes/head.php';
 ?>
-    <script languaje="javascript"> 
-        $(document).ready(function(){            
-            $("#ocultar").click(function(){
-                
-            })
-        })
-    </script>
 </head>
 <body>   
 <?php require_once '../includes/nav.php';?>

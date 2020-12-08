@@ -43,7 +43,7 @@
             if(count($resultado) > 0){
                 if($_POST['pswLogIn'] == $resultado['Contraseña']){            
                     $_SESSION["Type"] = "Usuario";
-                    $_SESSION["Id"] = $resultado['idCliente'];                    
+                    $_SESSION["Id"] = $resultado['idUsuario'];                    
                     sleep(1);
                     header('Location: ../../php/views/home.php');
                 } else {
