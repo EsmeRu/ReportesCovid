@@ -33,53 +33,49 @@ require_once '../includes/head.php';
                             <?php endif; ?>
                         <?php endif; ?>
                     </div>
-                    
-                    <?php
-                        
-                    ?>
 
-                    <div class="mg-top report-t">
+                    <div class="mg-top">
 
-                    <form class="formFiltro">
-                        <div class="flex-container">
-                            <select id="filtro_municipio" class="">
-                            <option value="" selected disabled> --Municipio-- </option>
-                            <?php
-                                $sql = mysqli_query($connection, "SELECT Nombre FROM Municipios");
-                                while($row = mysqli_fetch_assoc($sql)){
-                                    echo '
-                                    >
-                                    <option value="'.$row['Nombre'].'" >'.$row['Nombre'].'</option>
-                                    ';
-                                }   
-                            ?>
-                            </select>
-                            <select id="filtro_ciudad" class="">
-                            <option value="" selected disabled> --Ciudad-- </option>
-                            <?php
-                                $sql = mysqli_query($connection, "SELECT Nombre FROM Ciudades");
-                                while($row = mysqli_fetch_assoc($sql)){
-                                    echo '
-                                    >
-                                    <option value="'.$row['Nombre'].'" >'.$row['Nombre'].'</option>
-                                    ';
-                                }   
-                            ?>
-                            </select>
-                            <select id="filtro_estatus" class="">
-                                <option value="" selected disabled> --Estatus-- </option>
-                                <option value="En proceso" > En proceso </option>
-                                <option value="Confirmado" > Confirmado </option>
-                                <option value="Rechazado" > Rechazado </option>
-                                <option value="Rechazado" > Pendiente </option>
-                            </select>
-                        </div>
-                        <button type="submit" id="btnFiltro">Filtrar</button>
-                    </form>
-
+                        <form class="flex-container form-filter">
+                            <div class="flex-container">
+                                <select id="filtro_municipio" class="custom-select my-1 mr-sm-2">
+                                <option value="" selected disabled> --Municipio-- </option>
+                                <?php
+                                    $sql = mysqli_query($connection, "SELECT Nombre FROM Municipios");
+                                    while($row = mysqli_fetch_assoc($sql)){
+                                        echo '
+                                        >
+                                        <option value="'.$row['Nombre'].'" >'.$row['Nombre'].'</option>
+                                        ';
+                                    }   
+                                ?>
+                                </select>
+                                <select id="filtro_ciudad" class="custom-select my-1 mr-sm-2">
+                                <option value="" selected disabled> --Ciudad-- </option>
+                                <?php
+                                    $sql = mysqli_query($connection, "SELECT Nombre FROM Ciudades");
+                                    while($row = mysqli_fetch_assoc($sql)){
+                                        echo '
+                                        >
+                                        <option value="'.$row['Nombre'].'" >'.$row['Nombre'].'</option>
+                                        ';
+                                    }   
+                                ?>
+                                </select>
+                                <select id="filtro_estatus" class="custom-select my-1 mr-sm-2">
+                                    <option value="" selected disabled> --Estatus-- </option>
+                                    <option value="En proceso" > En proceso </option>
+                                    <option value="Confirmado" > Confirmado </option>
+                                    <option value="Rechazado" > Rechazado </option>
+                                    <option value="Rechazado" > Pendiente </option>
+                                </select>
+                            </div>
+                            <button type="submit" id="btnFiltro" class="btn btn-primary my-1">Filtrar</button>
+                        </form>
+                     <div class="report-t">             
                         <table class="table">
                             <thead>
-                                <tr class="fixed-th">
+                                <tr>
                                 <?php 
                                     $elementos = array('Nombre','Municipio','Ciudad','Dirección','Fecha de reporte','Status');
                                     foreach($elementos as $elemento): 
@@ -137,12 +133,12 @@ require_once '../includes/head.php';
                                 ?>                                                      
                             </tbody>
                         </table>
+                        </div>  
                     </div>
                 </div>
             </div>
         </div>
     </section>
-                <!-- END DATA TABLE-->
 
     <script src="../../js/filter.js"></script>                                
     <?php require_once '../includes/footer.php';?>
