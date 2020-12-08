@@ -7,7 +7,7 @@
             $email = $_POST['emailSignUp'];
             $contraseña = $_POST['pswSingUp'];
 
-            $sql = "CALL RegistrarCliente(?, ?, ?);";
+            $sql = "CALL RegistrarUsuario(?, ?, ?);";
             $statement = $connection->prepare($sql);
             $statement->bind_param("sss", $nombre,$email,$contraseña);
 

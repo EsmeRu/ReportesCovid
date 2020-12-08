@@ -1,13 +1,6 @@
 <?php
 require_once '../includes/head.php';
 ?>
-    <script languaje="javascript"> 
-        $(document).ready(function(){            
-            $("#ocultar").click(function(){
-                
-            })
-        })
-    </script>
 </head>
 <body>   
 <?php require_once '../includes/nav.php';?>
@@ -25,11 +18,6 @@ require_once '../includes/head.php';
                                 <h2>REPORTES<strong>-ENVIADOS</strong></h2>
                                 <a href="./nuevoReporte.php?action=agregar"><button id="addBtn" class="btn btn-success">
                                 <i class="fas fa-plus-circle"></i> Agregar Reporte</button></a>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                        <?php if(isset($_SESSION['Type'])): ?>
-                            <?php if($_SESSION['Type'] == 'Cliente'):?>
-                                
                             <?php endif; ?>
                         <?php endif; ?>
                     </div>
@@ -88,16 +76,16 @@ require_once '../includes/head.php';
                             <tbody id="tableRows">
                                 <?php  
                                     if(isset($_SESSION['Type'])) {
-                                        if($_SESSION['Type']=='Cliente'){
+                                        if($_SESSION['Type']=='Usuario'){
                                             $email = $_SESSION['Email'];
-                                            $sql = mysqli_query($connection, "SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE idCliente = (select idCliente from Clientes where Email = '$email');");
+                                            $sql = mysqli_query($connection, "SELECT NombreUsuario, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE idUsuario = (select idUsuario from Usuarios where Email = '$email');");
                                         }
                                         else {
                                             // if($filter){
                                             //     $sql = mysqli_query($connection,"SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE '$whereFilter' = '$filter';");
                                             // }
                                             // else{
-                                                $sql = mysqli_query($connection,"SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes;");
+                                                $sql = mysqli_query($connection,"SELECT NombreUsuario, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes;");
                                             // }
                                         }                       
                                     
@@ -123,7 +111,7 @@ require_once '../includes/head.php';
                                                 }
                                                 echo '
                                                 <tr class="tr-shadow">
-                                                    <td>'.$row['NombreCliente'].'</td>
+                                                    <td>'.$row['NombreUsuario'].'</td>
                                                     <td>'.$row['NombreMunicipio'].'</td>
                                                     <td>'.$row['NombreCiudad'].'</td>
                                                     <td>'.$row['Dirección'].'</td>

@@ -34,7 +34,7 @@
     <main class="detail-report-container" style="margin-bottom: 5rem;">
         <div class="flex-container jc-c titleButton">
             <h2>DETALLES<strong>-REPORTE</strong></h2>
-            <?php if($_SESSION['Type'] === 'Cliente'): ?>
+            <?php if($_SESSION['Type'] === 'Usuario'): ?>
                 <a href="./reporte.php?action=editar&id=<?php echo $idReporte?>">
                     <button id="editBtn" class="btn btn-primary">
                     <i class="fas fa-edit"></i> Editar Reporte</button>
@@ -46,7 +46,7 @@
             <input type="text" name="idReporte" id="idReporte" value="<?php echo $idReporte; ?>" class="hidden">
             <?php if($_SESSION['Type'] === 'Administrador'): ?>
                 <label for="Cliente">Cliente:</label>
-                <input Type="text" name="Cliente" id="Cliente" value="<?php echo $datosReporte['NombreCliente']; ?>" disabled>
+                <input Type="text" name="Cliente" id="Cliente" value="<?php echo $datosReporte['NombreUsuario']; ?>" disabled>
             <?php endif; ?>
 
             <div class="flex-container jc-c" style="width: 100%;">
@@ -77,7 +77,7 @@
             <input type="date" name="fechaReporte" id="fechaReporte" value="<?php echo $datosReporte['Fecha']; ?>" disabled>
                 
             <label for="status">Status</label>
-            <select id="status" name="status" <?php if($_SESSION['Type'] === 'Cliente'): echo 'disabled'; endif;?>>
+            <select id="status" name="status" <?php if($_SESSION['Type'] === 'Usuario'): echo 'disabled'; endif;?>>
                 <option value="Pendiente" selected>Pendiente</option>
                 <option value="Confirmado">Confirmado</option>
                 <option value="Rechazado">Rechazado</option>
