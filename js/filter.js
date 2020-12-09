@@ -47,7 +47,7 @@ const updateTable = (data = []) => {
         const color = element.StatusRepo === 'Confirmado' ? 'green;' : element.StatusRepo === 'En proceso' ? 'blue;' : element.StatusRepo === 'Rechazado' ? 'red;' : 'grey;';
          result += `
             <tr class="tr-shadow">
-            <td>${element.NombreCliente}</td>
+            <td>${element.NombreUsuario}</td>
             <td>${element.NombreMunicipio}</td>
             <td>${element.NombreCiudad}</td>
             <td>${element.Dirección}</td>
