@@ -81,14 +81,8 @@ require_once '../includes/head.php';
                                             $sql = mysqli_query($connection, "SELECT NombreUsuario, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE idUsuario = (select idUsuario from Usuarios where Email = '$email');");
                                         }
                                         else {
-                                            // if($filter){
-                                            //     $sql = mysqli_query($connection,"SELECT NombreCliente, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes WHERE '$whereFilter' = '$filter';");
-                                            // }
-                                            // else{
-                                                $sql = mysqli_query($connection,"SELECT NombreUsuario, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes;");
-                                            // }
-                                        }                       
-                                    
+                                            $sql = mysqli_query($connection,"SELECT NombreUsuario, NombreMunicipio, NombreCiudad, Dirección, Fecha, StatusRepo, idReporte FROM Reportes;");
+                                        }   
                                         if(mysqli_num_rows($sql) == 0){
                                             echo '<td>No hay ningún reporte.</td>';
                                         }
