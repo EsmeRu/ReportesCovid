@@ -78,10 +78,10 @@
                 
             <label for="status">Status</label>
             <select id="status" name="status" <?php if($_SESSION['Type'] === 'Usuario'): echo 'disabled'; endif;?>>
-                <option value="Pendiente" selected>Pendiente</option>
-                <option value="Confirmado">Confirmado</option>
-                <option value="Rechazado">Rechazado</option>
-                <option value="En proceso">En Proceso</option>
+                    <option value="Pendiente" <?php if($datosReporte['StatusRepo'] === 'Pendiente'): echo 'selected'; endif;?>>Pendiente</option>
+                    <option value="Confirmado" <?php if($datosReporte['StatusRepo'] === 'Confirmado'): echo 'selected'; endif;?>>Confirmado</option>
+                    <option value="Rechazado" <?php if($datosReporte['StatusRepo'] === 'Rechazado'): echo 'selected'; endif;?>>Rechazado</option>
+                    <option value="En proceso" <?php if($datosReporte['StatusRepo'] === 'En proceso'): echo 'selected'; endif;?>>En Proceso</option>
             </select>
 
             <label for="descripcion">Descripción</label>

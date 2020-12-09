@@ -25,3 +25,10 @@ const setDisabled = (action = "") => {
         document.getElementById("editBtn").disabled = true
     }
 }
+
+$("#status").change(function(){
+    console.log("olis");
+    $("#status option:selected").each(function(){
+        document.getElementById("confirmBtn").style.display='block'
+    })
+})
