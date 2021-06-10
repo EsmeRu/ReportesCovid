@@ -30,6 +30,9 @@ footer, header{
     padding: 1.5rem;
     width: 100%;
 }
+footer{
+    margin-top: 5rem;
+}
 header{
     z-index: 100;
 }
@@ -123,9 +126,13 @@ header{
     align-items: center;
 }
 /* TABLA */
+.table{
+    font-size: .9rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 .report-t{
     overflow: auto;
-    height: 50vh;
+    height: 38vh;
     margin-bottom: 5rem;
     /* border: 1px solid #d3d3d3;
     padding: 1rem; */
@@ -191,4 +198,30 @@ header{
 }
 .form-filter{
     margin: 2rem 0;
+}
+.cont-graficas{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 2rem 0 0;
+}
+.grafica{
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 2%;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+.grafica-queso{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background-color: #ffffff;
+    border-radius: 1%;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+.tablilla{
+    width: 75%;
 }
