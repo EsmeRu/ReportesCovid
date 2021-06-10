@@ -216,12 +216,13 @@ header{
 .grafica-queso{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 1rem;
     background-color: #ffffff;
     border-radius: 1%;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    width: 100%;
 }
 .tablilla{
-    width: 75%;
+    width: 70%;
 }

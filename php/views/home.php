@@ -134,9 +134,13 @@ require_once '../includes/head.php';
                             </div>
                         </div>
                                 
-                        <div class="cont-graficas">
-                            <?php require_once '../includes/graficaPastel.php';?>
-                        </div>
+                        <?php if(isset($_SESSION['Type'])): ?>
+                            <?php if($_SESSION['Type'] == 'Administrador'):?>
+                                <div class="cont-graficas">
+                                    <?php require_once '../includes/graficaPastel.php';?>
+                                </div>
+                            <?php endif; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
